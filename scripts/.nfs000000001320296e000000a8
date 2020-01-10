@@ -1,0 +1,21 @@
+
+    
+python train.py  -path=save_temp/d256_h16_dr0.2_g0_prebs0_siemb1_soemb0_ptr1_dhis1_pdhis1_N3-3 \
+    -d=256 -h_attn=16 \
+    -bsz=32 -wu=20000 -dr=0.2 \
+    -smooth=1 \
+    -gate=0 -sepiemb=1 -sepoemb=0 \
+    -dlhis=1 -pdlhis=1 -dv='2.1' \
+    -ptr=1 -eb=16 \
+    -ptest=1 -gtsys=1 -ptest_ft=1 \
+    -d2s_nn_N=3 -s2s_nn_N=3
+    
+#python test.py  -path=save_temp/d256_h16_dr0.2_g0_prebs0_siemb1_soemb0_ptr1_dhis1_pdhis1_N3-3 \
+#    -d=256 -h_attn=16 \
+#    -bsz=32 -wu=20000 -dr=0.2 \
+#    -smooth=1 \
+#    -gate=0 -sepiemb=1 -sepoemb=0 \
+#    -dlhis=1 -pdlhis=1 -dv='2.1' \
+#    -ptr=1 -eb=16 \
+#    -ptest=1 -gtsys=1 -ptest_ft=1 \
+#    -d2s_nn_N=3 -s2s_nn_N=3
