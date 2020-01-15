@@ -8,14 +8,15 @@ This is the PyTorch implementation of the paper:
 This code has been written using PyTorch 1.0.1. If you use the source code in this repo in your work, please cite the following paper. The bibtex is:
 <pre>
 @inproceedings{
-le2020nonautoregressive,
+Le2020Non-Autoregressive,
 title={Non-Autoregressive Dialog State Tracking},
-author={Hung Le and Steven C.H. Hoi and Richard Socher},
+author={Hung Le and Richard Socher and Steven C.H. Hoi},
 booktitle={International Conference on Learning Representations},
 year={2020},
 url={https://openreview.net/forum?id=H1e_cC4twS}
 }
 </pre>
+
 
 
 ## Abstract
