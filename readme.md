@@ -2,10 +2,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
 This is the PyTorch implementation of the paper:
-**[Non-Autoregressive Dialog State Tracking](<https://openreview.net/forum?id=H1e_cC4twS>)**. [**Hung Le**](https://github.com/henryhungle), [Richard Socher](https://www.socher.org/), [Steven C.H. Hoi](https://sites.google.com/view/stevenhoi/). ***[ICLR 2020](<https://openreview.net/group?id=ICLR.cc/2020/Conference>)***. 
+**[Non-Autoregressive Dialog State Tracking](<https://openreview.net/forum?id=H1e_cC4twS>)**. [**Hung Le**](https://github.com/henryhungle), [Richard Socher](https://www.socher.org/), [Steven C.H. Hoi](https://sites.google.com/view/stevenhoi/). ***[ICLR 2020](<https://openreview.net/group?id=ICLR.cc/2020/Conference>)***. ([arXiv](https://arxiv.org/abs/2002.08024)) 
 
 
-This code has been written using PyTorch 1.0.1. If you use the source code in this repo in your work, please cite the following paper. The bibtex is:
+This code has been written using PyTorch 1.0.1. If you find the paper or the source code useful to your projects, please cite the following bibtex: 
 <pre>
 @inproceedings{
 Le2020Non-Autoregressive,
@@ -39,7 +39,9 @@ Our NADST has 3 key components: encoders (red), fertility decoder (blue), and st
 
 ## Dataset
 
-We use the MultiWOZ benchmark, includin both version 2.0 and 2.1. The data can be found in the folder `data` in the repo root folder. 
+We use the MultiWOZ benchmark, including both version 2.0 ([Link](https://drive.google.com/drive/folders/1_DxHCT78LcLw08sss-F_vIwkgH6q1HmK?usp=sharing)) and 2.1 ([Link](https://drive.google.com/drive/folders/1qOZIBauQiqbMC7VB-KTVSkH_F-KAE6wm?usp=sharing)). Download the data and unzip into the root directory of the repo e.g. `NADST/data2.0` and `NADST/data2.1`.
+
+The data includes the original and pre-processed MultiWOZ dialogues with delexicalized system utterances and user utterances.  The pre-processed dialogues are prefixed with *nadst_*. 
 
 ## Scripts 
 
@@ -47,22 +49,30 @@ We created `run.sh` to prepare evaluation code, train models, generate dialogue 
 
 | Parameter           | Description                                                  | Values                                                       |
 | :------------------ | :----------------------------------------------------------- | ------------------------------------------------------------ |
-| path     | path where the model and training logs will be saved | e.g. save_temp/nadst_model |
-| d      | the embedding dimension to embed word tokens into continuous representations              | e.g. 256 |
-| h_attn | the number of attention heads applied in all attention blocks                   | e.g. 16 |
-| d2s_nn_N        | Number of layers/attention steps in fertility decoder                                  | e.g. 3                                                  |
-| s2s_nn_N        | Number of layers/attention steps in state decoder                                | e.g. 3                                                     |
-| bsz          | Number of instances in each training batch                                    | e.g. 32                                                      |
-| wu        | Number of warmup steps to increase the learning rate                                      | 20000                                                    |
-| dr        | Dropout rate during training                                 | e.g. 0.2                                                     |
-| dv        | The data version of the MultiWOZ benchmark                                 | either 2.0 or 2.1                                                     |
+| **path** | path where the model and training logs will be saved | e.g. save_temp/nadst_model |
+| **d**  | the embedding dimension to embed word tokens into continuous representations              | e.g. 256 |
+| **h_attn** | the number of attention heads applied in all attention blocks                   | e.g. 16 |
+| **fert_dec_N**  | Number of layers/attention steps in fertility decoder                                  | e.g. 3                                                  |
+| **state_dec_N** | Number of layers/attention steps in state decoder                                | e.g. 3                                                     |
+| **bsz**      | Number of instances in each training batch                                    | e.g. 32                                                      |
+| **wu**    | Number of warmup steps to increase the learning rate                                      | 20000                                                    |
+| **dr**    | Dropout rate during training                                 | e.g. 0.2                                                     |
+| **dv**    | The data version of the MultiWOZ benchmark                                 | either 2.0 or 2.1                                                     |
 
 While training, the model with the best validation is saved. The model is evaluated by using the losses from gate prediction, fertility prediction, and state generation. 
 The model output, parameters, vocabulary, and training and validation logs will be save into folder determined in the `path` parameter.  
 
-Other parameters, including data-related options, model parameters,  training and generating settings, are defined in the file `utils.config.py`.
+Other parameters, including data-related options, model parameters,  training and generating settings, are defined in the file `utils/config.py`.
+
+## Attention Visualization of Domain/slot Dependencies 
+
+<p align="center">
+<img src="img/visual.png" width="100%" />
+ Heatmap visualization of self-attention scores of 5 heads between Z_{ds×fert} representations in the state decoder. The corresponding prediction output for each representation is presented on the right side. The examples are for the 6th turn in dialogue ID MUL0536 (upper row) and PMUL3759 (lower row) in MultiWOZ2.1.
+</p>
 
 ## Sample Dialogue State
+
 <p align="center">
 <img src="img/sample_output.png" width="80%" />
 Example predicted dialogue states for dialogue ID MUL0536 in MultiWOZ2.1
