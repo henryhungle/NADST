@@ -45,7 +45,7 @@ The data includes the original and pre-processed MultiWOZ dialogues with delexic
 
 ## Scripts 
 
-We created `run.sh` to prepare evaluation code, train models, generate dialogue states, and evaluating the generated states with automatic metrics. You can directly run this file which includes example parameter setting: 
+We created `scripts/run.sh` to prepare evaluation code, train models, generate dialogue states, and evaluating the generated states with automatic metrics. You can directly run this file which includes example parameter setting: 
 
 | Parameter           | Description                                                  | Values                                                       |
 | :------------------ | :----------------------------------------------------------- | ------------------------------------------------------------ |
@@ -63,6 +63,13 @@ While training, the model with the best validation is saved. The model is evalua
 The model output, parameters, vocabulary, and training and validation logs will be save into folder determined in the `path` parameter.  
 
 Other parameters, including data-related options, model parameters,  training and generating settings, are defined in the file `utils/config.py`.
+
+An example of pretrained NADST model using the sampled script in `scripts/run.sh` can be downloaded [here](https://drive.google.com/file/d/1u9d8jPUR52TI8TJoFKjOwO69t4hw6FW5/view?usp=sharing). Unzip the download file and update the `path` parameter in the test command in the `scripts/run.sh` to the corresponding unzip directory e.g. `save/pretrained_nadst`. Using the pretrained model, the test script provides the following results: 
+
+|                              | Joint Acc | Slot Acc | F1     |
+| ---------------------------- | --------- | -------- | ------ |
+| Use predicted fertility/gate | 48.25%    | 97.24%   | 0.8858 |
+| Use oracle fertility/gate    | 70.64%    | 98.86%   | 0.9459 |
 
 ## Attention Visualization of Domain/slot Dependencies 
 
